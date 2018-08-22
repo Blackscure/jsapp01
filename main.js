@@ -1,4 +1,5 @@
-document.getElementById('issueInputForm').addEventListner('submit'.saveIssue):
+document.getElementById('issueInputForm').addEventListner('submit'.saveIssue);
+
 
 function saveIssues(e) {
     var issueDesc = document.getElementById('issueDescInput').value;
@@ -7,11 +8,11 @@ function saveIssues(e) {
     var issueId = chance.guid();
     var issueStatus = 'open';
 
-    var issue = {
-        id: issued,
+      var issue = {
+        id: issueId,
         description: issueDesc,
         serverity: issueSeverity,
-        assignedTo: issueAssignedTo;
+        assignedTo: issueAssignedTo,
         status: issueStatus
     }
 
@@ -19,27 +20,25 @@ function saveIssues(e) {
         var issues = [];
         issues.push(issue);
         localstorage.setItem('issues', JSON.stringfy(issues));
-
     } else {
       var issues = JSON.parse(localstorage.getItem('issues'));
       issues.push(issue);
       localstorage.setItem('issues',JSON.stringfy(issues));
     }
 
-
     document.getElementById('issueInputForm').reset();
 
     fetchIssues();
 
     e.preventDefault();
-}
+
+ }
 
 
 
 function fetchIssues() {
     var issues = JSON.parse(localstorage.getItem('issues'));
     var issuesListe = document.getElementById('issuesList');
-
 
     issuesList.innerHTML = '';
 
@@ -49,7 +48,6 @@ function fetchIssues() {
         var serverity = issues[i].serverity;
         var assignedTo = issues[i].assignedTo;
         var status = issues[i].status;
-
         issuesList.innerHTML += '<div class="Well">'+
                                 '<h6>Issue ID:' + id + '</h6>'+
                                 '<p><span class="label label-info">' + status + '</span></p>'+
@@ -59,6 +57,5 @@ function fetchIssues() {
                                 '<a href="#" onclick="setStatusClosed(\''+id+'\')"class ="btn btn-warning" >Close</a>'+
                                 '<a href="#" onclick="deleteIssueclass(\''+id+'\')"class ="btn btn-danger" >Delete</a>'+
                                 '</div>';
-
     }
 }
